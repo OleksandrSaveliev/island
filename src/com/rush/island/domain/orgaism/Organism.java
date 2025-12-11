@@ -1,4 +1,4 @@
 package com.rush.island.domain.orgaism;
 
-public class Organism {
+public abstract class Organism {
 }
