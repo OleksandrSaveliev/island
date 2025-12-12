@@ -1,7 +1,7 @@
-package com.rush.island;
+package com.rush;
 
-import com.rush.island.service.SimulationRunnerService;
-import com.rush.island.service.WorldInitializationService;
+import com.rush.service.SimulationRunnerService;
+import com.rush.service.WorldInitializationService;
 
 public class IslandApplication {
     public static void main(String[] args) {
