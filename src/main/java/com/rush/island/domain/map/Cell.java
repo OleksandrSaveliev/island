@@ -25,8 +25,8 @@ public class Cell {
       this.organisms.remove(organism);
    }
 
-   public long getCountByType(Class<? extends Organism> type) {
-      return organisms.stream()
+   public int getCountByType(Class<? extends Organism> type) {
+      return (int) organisms.stream()
               .filter(type::isInstance)
               .count();
    }
