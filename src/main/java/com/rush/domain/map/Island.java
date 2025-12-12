@@ -1,6 +1,6 @@
-package com.rush.island.domain.map;
+package com.rush.domain.map;
 
-import com.rush.island.config.MapConfig;
+import com.rush.config.MapConfig;
 
 public class Island {
 

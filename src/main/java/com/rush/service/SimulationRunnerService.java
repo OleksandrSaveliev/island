@@ -1,9 +1,9 @@
-package com.rush.island.service;
+package com.rush.service;
 
-import com.rush.island.domain.map.Cell;
-import com.rush.island.domain.map.Island;
-import com.rush.island.domain.orgaism.animal.Animal;
-import com.rush.island.domain.orgaism.plant.Plant;
+import com.rush.domain.map.Cell;
+import com.rush.domain.map.Island;
+import com.rush.domain.orgaism.animal.Animal;
+import com.rush.domain.orgaism.plant.Plant;
 
 public class SimulationRunnerService {
     private final Island island = Island.getInstance();

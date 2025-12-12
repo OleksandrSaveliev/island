@@ -1,10 +1,10 @@
-package com.rush.island.service;
+package com.rush.service;
 
-import com.rush.island.config.MapConfig;
-import com.rush.island.domain.map.Cell;
-import com.rush.island.domain.map.Island;
-import com.rush.island.domain.orgaism.plant.Grass;
-import com.rush.island.domain.orgaism.plant.Plant;
+import com.rush.config.MapConfig;
+import com.rush.domain.map.Cell;
+import com.rush.domain.map.Island;
+import com.rush.domain.orgaism.plant.Grass;
+import com.rush.domain.orgaism.plant.Plant;
 
 import java.util.ArrayList;
 import java.util.List;

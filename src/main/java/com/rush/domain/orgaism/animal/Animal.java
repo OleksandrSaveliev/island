@@ -1,7 +1,7 @@
-package com.rush.island.domain.orgaism.animal;
+package com.rush.domain.orgaism.animal;
 
-import com.rush.island.domain.map.Cell;
-import com.rush.island.domain.orgaism.Organism;
+import com.rush.domain.orgaism.Organism;
+import com.rush.domain.map.Cell;
 
 public abstract class Animal extends Organism {
     private boolean isAlive = true;

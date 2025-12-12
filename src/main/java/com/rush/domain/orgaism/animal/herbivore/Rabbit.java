@@ -1,6 +1,6 @@
-package com.rush.island.domain.orgaism.animal.herbivore;
+package com.rush.domain.orgaism.animal.herbivore;
 
-import com.rush.island.domain.orgaism.animal.Animal;
+import com.rush.domain.orgaism.animal.Animal;
 
 public class Rabbit extends Animal {
     @Override

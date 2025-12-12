@@ -1,4 +1,4 @@
-package com.rush.island.config;
+package com.rush.config;
 
 public class MapConfig {
     public static final int MAP_WIDTH = 10;

@@ -1,6 +1,6 @@
-package com.rush.island.domain.map;
+package com.rush.domain.map;
 
-import com.rush.island.domain.orgaism.Organism;
+import com.rush.domain.orgaism.Organism;
 
 import java.util.ArrayList;
 import java.util.List;
