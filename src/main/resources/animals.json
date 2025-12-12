@@ -1,0 +1,17 @@
+[
+  { "type": "Wolf", "weight": 50, "maxCount": 30, "speed": 3, "foodNeeded": 8 },
+  { "type": "Python", "weight": 15, "maxCount": 30, "speed": 1, "foodNeeded": 3 },
+  { "type": "Fox", "weight": 8, "maxCount": 30, "speed": 2, "foodNeeded": 2 },
+  { "type": "Bear", "weight": 500, "maxCount": 5, "speed": 2, "foodNeeded": 80 },
+  { "type": "Eagle", "weight": 6, "maxCount": 20, "speed": 3, "foodNeeded": 1 },
+  { "type": "Horse", "weight": 400, "maxCount": 20, "speed": 4, "foodNeeded": 60 },
+  { "type": "Deer", "weight": 300, "maxCount": 20, "speed": 4, "foodNeeded": 50 },
+  { "type": "Rabbit", "weight": 2, "maxCount": 150, "speed": 2, "foodNeeded": 0.45 },
+  { "type": "Mouse", "weight": 0.05, "maxCount": 500, "speed": 1, "foodNeeded": 0.01 },
+  { "type": "Goat", "weight": 60, "maxCount": 140, "speed": 3, "foodNeeded": 10 },
+  { "type": "Sheep", "weight": 70, "maxCount": 140, "speed": 3, "foodNeeded": 15 },
+  { "type": "Boar", "weight": 400, "maxCount": 50, "speed": 2, "foodNeeded": 50 },
+  { "type": "Buffalo", "weight": 700, "maxCount": 10, "speed": 3, "foodNeeded": 100 },
+  { "type": "Duck", "weight": 1, "maxCount": 200, "speed": 4, "foodNeeded": 0.15 },
+  { "type": "Caterpillar", "weight": 0.01, "maxCount": 1000, "speed": 0, "foodNeeded": 0 }
+]

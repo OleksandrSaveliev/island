@@ -1,8 +1,14 @@
 package com.rush.domain.orgaism.animal.herbivore;
 
+import com.rush.domain.map.Cell;
 import com.rush.domain.orgaism.animal.Animal;
 
 public class Rabbit extends Animal {
+
+    public Rabbit(Cell cell) {
+        super(cell);
+    }
+
     @Override
     public void move() {
 
