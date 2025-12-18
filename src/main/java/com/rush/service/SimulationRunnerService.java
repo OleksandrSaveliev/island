@@ -3,6 +3,8 @@ package com.rush.service;
 import com.rush.domain.map.Cell;
 import com.rush.domain.map.Island;
 import com.rush.domain.orgaism.animal.Animal;
+import com.rush.domain.orgaism.animal.herbivore.Rabbit;
+import com.rush.domain.orgaism.animal.predator.Wolf;
 import com.rush.domain.orgaism.plant.Plant;
 
 public class SimulationRunnerService {
@@ -18,7 +20,6 @@ public class SimulationRunnerService {
                 throw new RuntimeException(e);
             }
         }
-
     }
 
     private void printCells() {
@@ -29,7 +30,8 @@ public class SimulationRunnerService {
 
             // First row: Animals
             for (int j = 0; j < cells[i].length; j++) {
-                System.out.printf("| A:%3d ", cells[i][j].getCountByType(Animal.class));
+                System.out.printf("| Wolf:%3d ", cells[i][j].getCountByType(Wolf.class));
+                System.out.printf("| Rabbit:%3d ", cells[i][j].getCountByType(Rabbit.class));
             }
             System.out.println("|");
 

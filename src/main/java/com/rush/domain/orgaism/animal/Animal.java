@@ -4,33 +4,26 @@ import com.rush.config.AnimalConfig;
 import com.rush.config.ConfigLoader;
 import com.rush.domain.map.Cell;
 import com.rush.domain.orgaism.Organism;
-import com.rush.exception.NoSuchConfigException;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public abstract class Animal extends Organism {
-    private int weight;
-    private int maxCount;
-    private int speed;
-    private int foodNeeded;
-    private boolean isAlive = true;
-    private Cell cell;
+
+    protected boolean isAlive = true;
+    protected Cell cell;
+    protected final int weight;
+    protected final int speed;
+    protected final int foodNeeded;
 
     protected Animal(Cell cell) {
+        AnimalConfig cfg = ConfigLoader.getConfig(this.getClass());
+
         this.cell = cell;
-
-        AnimalConfig config = ConfigLoader.getConfig(this.getClass().getSimpleName());
-
-        if (config == null) {
-            throw new NoSuchConfigException("Animal config not found for class " + this.getClass().getSimpleName());
-        }
-
-        this.weight = config.getWeight();
-        this.maxCount = config.getMaxCount();
-        this.speed = config.getSpeed();
-        this.foodNeeded = config.getFoodNeeded();
+        this.weight = cfg.getWeight();
+        this.speed = cfg.getSpeed();
+        this.foodNeeded = cfg.getFoodNeeded();
     }
 
     public abstract void move();

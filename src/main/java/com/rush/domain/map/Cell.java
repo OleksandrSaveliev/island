@@ -1,19 +1,17 @@
 package com.rush.domain.map;
 
 import com.rush.domain.orgaism.Organism;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Cell {
 
    private final List<Organism> organisms = new ArrayList<>();
 
-   public List<Organism> getOrganisms() {
-      return organisms;
-   }
-
-   public void addOrganism(Organism organism) {
+    public void addOrganism(Organism organism) {
       this.organisms.add(organism);
    }
 

@@ -7,11 +7,7 @@ import com.rush.service.WorldInitializationService;
 public class IslandApplication {
     public static void main(String[] args) {
 
-        try {
-            ConfigLoader.loadConfigs("animals.json");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        ConfigLoader.load("animals.json");
 
         WorldInitializationService worldInitializationService = new WorldInitializationService();
         worldInitializationService.initialize();
