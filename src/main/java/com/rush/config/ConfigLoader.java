@@ -20,7 +20,7 @@ public class ConfigLoader {
 
         ANIMAL_TYPES = reflections.getSubTypesOf(Animal.class)
                 .stream()
-                .filter(c -> !Modifier.isAbstract(c.getModifiers())) // only concrete
+                .filter(c -> !Modifier.isAbstract(c.getModifiers()))
                 .collect(Collectors.toMap(Class::getSimpleName, c -> c));
     }
 

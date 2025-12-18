@@ -7,4 +7,9 @@ public abstract class Herbivore extends Animal {
     protected Herbivore(Cell cell) {
         super(cell);
     }
+
+    @Override
+    public void eat() {
+
+    }
 }

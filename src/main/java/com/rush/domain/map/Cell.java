@@ -1,41 +1,34 @@
 package com.rush.domain.map;
 
 import com.rush.domain.orgaism.Organism;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
-@Getter
 public class Cell {
 
    private final List<Organism> organisms = new ArrayList<>();
 
-   public synchronized void addOrganism(Organism organism) {
-      this.organisms.add(organism);
+   public synchronized void add(Organism organism) {
+      organisms.add(organism);
    }
 
-   public synchronized void growPlants(AtomicInteger amount, Class<? extends Organism> plantClass) {
-      for (int i = 0; i < amount.get() ; i++) {
-         try {
-            Organism plant = plantClass.getDeclaredConstructor().newInstance();
-            organisms.add(plant);
-         } catch (Exception e) {
-            throw new RuntimeException("Failed to create plant instance", e);
-         }
-      }
+   public synchronized void remove(Organism organism) {
+      organisms.remove(organism);
    }
 
-   public void addOrganisms(List<? extends Organism> organisms) {
-      this.organisms.addAll(organisms);
+   public synchronized List<Organism> getAll() {
+      return List.copyOf(organisms);
    }
 
-   public void removeOrganism(Organism organism) {
-      this.organisms.remove(organism);
+   public synchronized <T extends Organism> List<T> getByType(Class<T> type) {
+      return organisms.stream()
+              .filter(type::isInstance)
+              .map(type::cast)
+              .toList();
    }
 
-   public int getCountByType(Class<? extends Organism> type) {
+   public synchronized int count(Class<? extends Organism> type) {
       return (int) organisms.stream()
               .filter(type::isInstance)
               .count();
