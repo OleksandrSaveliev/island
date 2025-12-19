@@ -1,6 +1,7 @@
 package com.rush.domain.orgaism.animal;
 
 import com.rush.config.AnimalConfig;
+import com.rush.config.AnimalRegistry;
 import com.rush.config.ConfigLoader;
 import com.rush.domain.map.Cell;
 import com.rush.domain.orgaism.Organism;
@@ -18,13 +19,11 @@ public abstract class Animal extends Organism {
     protected final double foodNeeded;
     protected double fullness;
 
-    protected Animal(Cell cell) {
-        AnimalConfig cfg = ConfigLoader.getConfig(this.getClass());
-
+    protected Animal(Cell cell, AnimalConfig config) {
         this.cell = cell;
-        this.weight = cfg.getWeight();
-        this.speed = cfg.getSpeed();
-        this.foodNeeded = cfg.getFoodNeeded();
+        this.weight = config.getWeight();
+        this.speed = config.getSpeed();
+        this.foodNeeded = config.getFoodNeeded();
         this.fullness = foodNeeded / 2;
     }
 
