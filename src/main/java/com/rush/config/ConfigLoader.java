@@ -2,62 +2,27 @@ package com.rush.config;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rush.domain.orgaism.animal.Animal;
-import org.reflections.Reflections;
 
 import java.io.InputStream;
-import java.lang.reflect.Modifier;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
 
 public class ConfigLoader {
 
-    private static final Map<Class<? extends Animal>, AnimalConfig> CONFIGS = new HashMap<>();
-    private static final Map<String, Class<? extends Animal>> ANIMAL_TYPES;
+    private final ObjectMapper mapper = new ObjectMapper();
 
-    static {
-        Reflections reflections = new Reflections("com.rush.domain.orgaism.animal");
-
-        ANIMAL_TYPES = reflections.getSubTypesOf(Animal.class)
-                .stream()
-                .filter(c -> !Modifier.isAbstract(c.getModifiers()))
-                .collect(Collectors.toMap(Class::getSimpleName, c -> c));
-    }
-
-    private ConfigLoader() {
-    }
-
-    public static void load(String path) {
-        ObjectMapper mapper = new ObjectMapper();
-
-        try (InputStream is = ConfigLoader.class
-                .getClassLoader()
-                .getResourceAsStream(path)) {
-
-            List<AnimalConfig> list = mapper.readValue(
-                    is, new TypeReference<>() {
-                    }
-            );
-
-            for (AnimalConfig cfg : list) {
-                Class<? extends Animal> clazz = ANIMAL_TYPES.get(cfg.getType());
-                CONFIGS.put(clazz, cfg);
-            }
-
+    public List<AnimalConfig> loadAnimals(String path) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream(path)) {
+            return mapper.readValue(is, new TypeReference<>() {});
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load configs", e);
+            throw new RuntimeException("Failed to load animal configs", e);
         }
     }
 
-    public static AnimalConfig getConfig(Class<? extends Animal> clazz) {
-        return CONFIGS.get(clazz);
-    }
-
-    public static Set<Class<? extends Animal>> getAllAnimalsTypes() {
-        return new HashSet<>(ANIMAL_TYPES.values());
-    }
-
-    public static int maxCount(Class<? extends Animal> clazz) {
-        return CONFIGS.get(clazz).getMaxCount();
+    public FeedingConfig loadFeeding(String path) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream(path)) {
+            return mapper.readValue(is, FeedingConfig.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load feeding probabilities", e);
+        }
     }
 }
