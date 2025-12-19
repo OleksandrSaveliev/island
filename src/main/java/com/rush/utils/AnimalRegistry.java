@@ -27,7 +27,6 @@ public class AnimalRegistry {
 
     private AnimalRegistry() {}
 
-    // ---------- registration ----------
     public static void registerAnimals(Iterable<AnimalConfig> configs) {
         for (AnimalConfig cfg : configs) {
             Class<? extends Animal> clazz = TYPES.get(cfg.getType());
@@ -52,7 +51,11 @@ public class AnimalRegistry {
         return feedingConfig;
     }
 
-    public static Set<Class<? extends Animal>> allAnimals() {
+    public static Set<Class<? extends Animal>> getAllAnimalsTypes() {
         return CONFIGS.keySet();
+    }
+
+    public static int getMaxCountByType(Class<? extends Animal> clazz) {
+        return CONFIGS.get(clazz).getMaxCount();
     }
 }

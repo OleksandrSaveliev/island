@@ -1,6 +1,6 @@
 package com.rush.service;
 
-import com.rush.config.ConfigLoader;
+import com.rush.config.AnimalRegistry;
 import com.rush.config.MapConfig;
 import com.rush.domain.map.Cell;
 import com.rush.domain.map.Island;
@@ -34,8 +34,8 @@ public class WorldInitializationService {
     }
 
     private void populateAnimals(Cell cell) {
-        for (Class<? extends Animal> type : ConfigLoader.getAllAnimalsTypes()) {
-            int max = ConfigLoader.maxCount(type);
+        for (Class<? extends Animal> type : AnimalRegistry.getAllAnimalsTypes()) {
+            int max = AnimalRegistry.getMaxCountByType(type);
             int count = random.nextInt(max + 1);
 
             for (int i = 0; i < count; i++) {

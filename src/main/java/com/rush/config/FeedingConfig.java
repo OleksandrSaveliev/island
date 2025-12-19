@@ -1,12 +1,19 @@
 package com.rush.config;
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.rush.domain.orgaism.animal.Animal;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class FeedingConfig {
 
-    private Map<String, Map<String, Integer>> probabilities;
+    private final Map<String, Map<String, Integer>> probabilities = new HashMap<>();
+
+    @JsonAnySetter
+    public void addPredator(String predator, Map<String, Integer> victims) {
+        probabilities.put(predator, victims);
+    }
 
     public int getProbability(
             Class<? extends Animal> predator,

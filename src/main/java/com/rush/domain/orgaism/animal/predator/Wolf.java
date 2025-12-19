@@ -1,13 +1,13 @@
 package com.rush.domain.orgaism.animal.predator;
 
+import com.rush.config.AnimalConfig;
 import com.rush.domain.map.Cell;
 import com.rush.domain.orgaism.Organism;
-import com.rush.domain.orgaism.animal.Animal;
 
 public class Wolf extends Predator {
 
-    public Wolf(Cell cell) {
-        super(cell);
+    public Wolf(Cell cell, AnimalConfig config) {
+        super(cell, config);
     }
 
     @Override

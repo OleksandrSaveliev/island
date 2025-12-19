@@ -8,6 +8,10 @@ import com.rush.service.*;
 import java.util.List;
 
 public class ApplicationStarter {
+
+    private ApplicationStarter() {
+    }
+
     public static void start() {
         loadConfigurations();
 
