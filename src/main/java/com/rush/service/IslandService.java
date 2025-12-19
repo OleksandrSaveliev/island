@@ -6,6 +6,7 @@ import com.rush.domain.orgaism.animal.Animal;
 import com.rush.domain.orgaism.animal.herbivore.Rabbit;
 import com.rush.domain.orgaism.animal.predator.Wolf;
 import com.rush.domain.orgaism.plant.Plant;
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class IslandService {
 
+    @Getter
     private final Cell[][] cells;
     private final CellService cellService;
 

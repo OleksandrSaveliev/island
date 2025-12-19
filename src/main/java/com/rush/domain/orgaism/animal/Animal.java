@@ -16,6 +16,7 @@ public abstract class Animal extends Organism {
     protected final int weight;
     protected final int speed;
     protected final int foodNeeded;
+    protected int fullness;
 
     protected Animal(Cell cell) {
         AnimalConfig cfg = ConfigLoader.getConfig(this.getClass());
@@ -24,13 +25,20 @@ public abstract class Animal extends Organism {
         this.weight = cfg.getWeight();
         this.speed = cfg.getSpeed();
         this.foodNeeded = cfg.getFoodNeeded();
+        this.fullness = foodNeeded / 2;
     }
 
     public abstract void move();
 
-    public abstract void eat();
+    public abstract void eat(Organism organism);
+
+    public abstract boolean canEat(Organism organism);
 
     public abstract void reproduce();
 
     public abstract void die();
+
+    public boolean isHungry() {
+        return fullness == foodNeeded;
+    }
 }

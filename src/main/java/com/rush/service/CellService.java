@@ -1,6 +1,7 @@
 package com.rush.service;
 
 import com.rush.domain.map.Cell;
+import com.rush.domain.orgaism.Organism;
 import com.rush.domain.orgaism.animal.Animal;
 import com.rush.domain.orgaism.plant.Plant;
 import com.rush.utils.AnimalFactory;
@@ -34,4 +35,7 @@ public class CellService {
         }
     }
 
+    public void removeOrganism(Cell cell, Organism organism) {
+        cell.remove(organism);
+    }
 }

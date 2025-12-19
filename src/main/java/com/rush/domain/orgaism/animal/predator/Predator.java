@@ -1,6 +1,7 @@
 package com.rush.domain.orgaism.animal.predator;
 
 import com.rush.domain.map.Cell;
+import com.rush.domain.orgaism.Organism;
 import com.rush.domain.orgaism.animal.Animal;
 
 public abstract class Predator extends Animal {
@@ -9,7 +10,7 @@ public abstract class Predator extends Animal {
     }
 
     @Override
-    public void eat() {
+    public void eat(Organism organism) {
 
     }
 }
