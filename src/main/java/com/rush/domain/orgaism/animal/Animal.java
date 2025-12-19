@@ -15,8 +15,8 @@ public abstract class Animal extends Organism {
     protected Cell cell;
     protected final int weight;
     protected final int speed;
-    protected final int foodNeeded;
-    protected int fullness;
+    protected final double foodNeeded;
+    protected double fullness;
 
     protected Animal(Cell cell) {
         AnimalConfig cfg = ConfigLoader.getConfig(this.getClass());

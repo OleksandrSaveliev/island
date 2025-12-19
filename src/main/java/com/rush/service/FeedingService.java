@@ -24,7 +24,7 @@ public class FeedingService {
             cellService.removeOrganism(cell, organism);
 
             if (!animal.isHungry()) {
-                break;
+                return;
             }
         }
     }

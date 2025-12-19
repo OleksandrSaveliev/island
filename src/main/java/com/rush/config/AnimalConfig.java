@@ -8,5 +8,5 @@ public class AnimalConfig {
     private int weight;
     private int maxCount;
     private int speed;
-    private int foodNeeded;
+    private double foodNeeded;
 }

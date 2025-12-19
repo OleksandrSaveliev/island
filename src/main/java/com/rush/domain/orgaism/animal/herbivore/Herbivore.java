@@ -18,5 +18,8 @@ public abstract class Herbivore extends Animal {
     @Override
     public void eat(Organism food) {
         fullness += ((Plant) food).getWeight();
+        if (fullness > foodNeeded) {
+            fullness = foodNeeded;
+        }
     }
 }

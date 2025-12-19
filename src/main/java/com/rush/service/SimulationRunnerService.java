@@ -1,5 +1,6 @@
 package com.rush.service;
 
+import com.rush.config.MapConfig;
 import com.rush.domain.orgaism.animal.Animal;
 import com.rush.domain.orgaism.plant.Grass;
 
@@ -41,7 +42,7 @@ public class SimulationRunnerService {
 
     private void startGrassGrowth() {
         scheduler.scheduleAtFixedRate(
-                () -> islandService.growPlantsRandomly(Grass.class, 5),
+                () -> islandService.growPlantsRandomly(Grass.class, MapConfig.MAX_PLANTS_PER_TICK),
                 0, 2, TimeUnit.SECONDS
         );
     }
