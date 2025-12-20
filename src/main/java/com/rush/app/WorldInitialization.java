@@ -1,4 +1,4 @@
-package com.rush.service;
+package com.rush.app;
 
 import com.rush.config.AnimalRegistry;
 import com.rush.config.MapConfig;
@@ -6,16 +6,17 @@ import com.rush.domain.map.Cell;
 import com.rush.domain.map.Island;
 import com.rush.domain.orgaism.animal.Animal;
 import com.rush.domain.orgaism.plant.Grass;
+import com.rush.service.CellService;
 
 import java.util.Random;
 
-public class WorldInitializationService {
+public class WorldInitialization {
 
     private final Island island;
     private final CellService cellService;
     private final Random random = new Random();
 
-    public WorldInitializationService(Island island, CellService cellService) {
+    public WorldInitialization(Island island, CellService cellService) {
         this.island = island;
         this.cellService = cellService;
     }

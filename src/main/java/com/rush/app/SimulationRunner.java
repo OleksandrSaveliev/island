@@ -1,8 +1,11 @@
-package com.rush.service;
+package com.rush.app;
 
 import com.rush.config.MapConfig;
 import com.rush.domain.orgaism.animal.Animal;
 import com.rush.domain.orgaism.plant.Grass;
+import com.rush.service.CellService;
+import com.rush.service.FeedingService;
+import com.rush.service.IslandService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class SimulationRunnerService {
+public class SimulationRunner {
 
     private final IslandService islandService;
     private final FeedingService feedingService;
@@ -19,7 +22,7 @@ public class SimulationRunnerService {
     private final ScheduledExecutorService scheduler =
             Executors.newScheduledThreadPool(3);
 
-    public SimulationRunnerService(IslandService islandService, FeedingService feedingService, CellService cellService) {
+    public SimulationRunner(IslandService islandService, FeedingService feedingService, CellService cellService) {
         this.islandService = islandService;
         this.feedingService = feedingService;
         this.cellService = cellService;

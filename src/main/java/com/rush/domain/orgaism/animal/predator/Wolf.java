@@ -16,16 +16,6 @@ public class Wolf extends Predator {
     }
 
     @Override
-    public boolean canEat(Organism organism) {
-        return false;
-    }
-
-    @Override
-    public void eat(Organism organism) {
-
-    }
-
-    @Override
     public void reproduce() {
 
     }

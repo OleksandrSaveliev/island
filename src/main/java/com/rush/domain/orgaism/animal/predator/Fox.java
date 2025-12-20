@@ -14,10 +14,6 @@ public class Fox extends Predator {
 
     }
 
-    @Override
-    public boolean canEat(Organism organism) {
-        return false;
-    }
 
     @Override
     public void reproduce() {

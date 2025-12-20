@@ -3,7 +3,9 @@ package com.rush.app;
 import com.rush.config.*;
 import com.rush.config.AnimalRegistry;
 import com.rush.domain.map.Island;
-import com.rush.service.*;
+import com.rush.service.CellService;
+import com.rush.service.FeedingService;
+import com.rush.service.IslandService;
 
 import java.util.List;
 
@@ -20,9 +22,10 @@ public class ApplicationStarter {
         IslandService islandService = new IslandService(island, cellService);
         FeedingService feedingService = new FeedingService(cellService);
 
-        WorldInitializationService worldInitializationService = new WorldInitializationService(island, cellService);
-        worldInitializationService.initialize();
-        SimulationRunnerService runner = new SimulationRunnerService(islandService, feedingService, cellService);
+        WorldInitialization worldInitialization = new WorldInitialization(island, cellService);
+        SimulationRunner runner = new SimulationRunner(islandService, feedingService, cellService);
+
+        worldInitialization.initialize();
         runner.run();
     }
 

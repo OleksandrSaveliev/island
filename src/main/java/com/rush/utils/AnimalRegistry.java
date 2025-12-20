@@ -47,8 +47,8 @@ public class AnimalRegistry {
         return CONFIGS.get(clazz);
     }
 
-    public static FeedingConfig getFeedingConfig() {
-        return feedingConfig;
+    public static int getProbabilityToCatch(Class<? extends Animal> predatorType, Class<? extends Animal> victimType) {
+        return feedingConfig.getProbability(predatorType, victimType);
     }
 
     public static Set<Class<? extends Animal>> getAllAnimalsTypes() {

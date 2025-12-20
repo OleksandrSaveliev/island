@@ -15,11 +15,6 @@ public class Python extends Predator{
     }
 
     @Override
-    public boolean canEat(Organism organism) {
-        return false;
-    }
-
-    @Override
     public void reproduce() {
 
     }

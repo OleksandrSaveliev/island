@@ -4,14 +4,24 @@ import com.rush.config.AnimalConfig;
 import com.rush.domain.map.Cell;
 import com.rush.domain.orgaism.Organism;
 import com.rush.domain.orgaism.animal.Animal;
+import com.rush.domain.orgaism.animal.herbivore.Herbivore;
+import com.rush.domain.orgaism.plant.Plant;
 
 public abstract class Predator extends Animal {
-    public Predator(Cell cell, AnimalConfig config) {
+    protected Predator(Cell cell, AnimalConfig config) {
         super(cell, config);
     }
 
     @Override
-    public void eat(Organism organism) {
+    public boolean canEat(Organism organism) {
+        return organism instanceof Herbivore;
+    }
 
+    @Override
+    public void eat(Organism food) {
+        fullness += ((Herbivore) food).getWeight();
+        if (fullness > foodNeeded) {
+            fullness = foodNeeded;
+        }
     }
 }

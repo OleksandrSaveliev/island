@@ -49,6 +49,7 @@ public class IslandService {
             System.out.println("-".repeat(60));
             for (int j = 0; j < cells[i].length; j++) {
                 Cell cell = cells[i][j];
+                System.out.printf("| A:%3d ", cell.count(Animal.class));
                 System.out.printf("| W:%3d ", cell.count(Wolf.class));
                 System.out.printf("| R:%3d ", cell.count(Rabbit.class));
                 System.out.printf("| P:%3d ", cell.count(Plant.class));
