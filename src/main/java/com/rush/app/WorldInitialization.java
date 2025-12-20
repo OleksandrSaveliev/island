@@ -12,7 +12,6 @@ import java.util.Random;
 
 public class WorldInitialization {
 
-
     private final IslandService islandService;
     private final CellService cellService;
     private final Random random = new Random();

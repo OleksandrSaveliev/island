@@ -38,4 +38,8 @@ public class CellService {
     public void removeOrganism(Cell cell, Organism organism) {
         cell.remove(organism);
     }
+
+    public void addOrganism(Cell targetCell, Animal animal) {
+        targetCell.add(animal);
+    }
 }
