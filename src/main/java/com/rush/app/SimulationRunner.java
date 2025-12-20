@@ -4,7 +4,7 @@ import com.rush.config.MapConfig;
 import com.rush.domain.orgaism.animal.Animal;
 import com.rush.domain.orgaism.plant.Grass;
 import com.rush.service.CellService;
-import com.rush.service.FeedingService;
+import com.rush.service.AnimalService;
 import com.rush.service.IslandService;
 
 import java.util.Arrays;
@@ -16,15 +16,15 @@ import java.util.concurrent.TimeUnit;
 public class SimulationRunner {
 
     private final IslandService islandService;
-    private final FeedingService feedingService;
+    private final AnimalService animalService;
     private final CellService cellService;
 
     private final ScheduledExecutorService scheduler =
             Executors.newScheduledThreadPool(3);
 
-    public SimulationRunner(IslandService islandService, FeedingService feedingService, CellService cellService) {
+    public SimulationRunner(IslandService islandService, AnimalService animalService, CellService cellService) {
         this.islandService = islandService;
-        this.feedingService = feedingService;
+        this.animalService = animalService;
         this.cellService = cellService;
     }
 
@@ -55,7 +55,7 @@ public class SimulationRunner {
                 .flatMap(Arrays::stream)
                 .forEach(cell -> {
                     List<Animal> animals = cellService.getAnimals(cell);
-                    animals.forEach(animal -> feedingService.feedAnimal(animal, cell));
+                    animals.forEach(animal -> animalService.feedAnimal(animal, cell));
                 });
     }
 

@@ -3,26 +3,27 @@ package com.rush.app;
 import com.rush.config.AnimalRegistry;
 import com.rush.config.MapConfig;
 import com.rush.domain.map.Cell;
-import com.rush.domain.map.Island;
 import com.rush.domain.orgaism.animal.Animal;
 import com.rush.domain.orgaism.plant.Grass;
 import com.rush.service.CellService;
+import com.rush.service.IslandService;
 
 import java.util.Random;
 
 public class WorldInitialization {
 
-    private final Island island;
+
+    private final IslandService islandService;
     private final CellService cellService;
     private final Random random = new Random();
 
-    public WorldInitialization(Island island, CellService cellService) {
-        this.island = island;
+    public WorldInitialization(IslandService islandService, CellService cellService) {
+        this.islandService = islandService;
         this.cellService = cellService;
     }
 
     public void initialize() {
-        for (Cell[] row : island.getCells()) {
+        for (Cell[] row : islandService.getCells()) {
             for (Cell cell : row) {
                 populateCell(cell);
             }

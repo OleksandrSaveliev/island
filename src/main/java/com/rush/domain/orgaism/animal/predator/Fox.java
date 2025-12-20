@@ -9,11 +9,6 @@ public class Fox extends Predator {
         super(cell, config);
     }
 
-    @Override
-    public void move() {
-
-    }
-
 
     @Override
     public void reproduce() {

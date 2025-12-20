@@ -9,11 +9,6 @@ public class Deer extends Herbivore {
     }
 
     @Override
-    public void move() {
-
-    }
-
-    @Override
     public void reproduce() {
 
     }

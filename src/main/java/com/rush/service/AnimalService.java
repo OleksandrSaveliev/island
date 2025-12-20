@@ -10,12 +10,16 @@ import com.rush.domain.orgaism.animal.predator.Predator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class FeedingService {
+public class AnimalService {
     private final CellService cellService;
+    private final IslandService islandService;
 
-    public FeedingService(CellService cellService) {
+    public AnimalService(CellService cellService, IslandService islandService) {
         this.cellService = cellService;
+        this.islandService = islandService;
     }
+
+
 
     public void feedAnimal(Animal animal, Cell cell) {
         for (Organism organism : List.copyOf(cell.getAll())) {

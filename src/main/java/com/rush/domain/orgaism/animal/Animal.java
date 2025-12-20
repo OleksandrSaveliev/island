@@ -1,12 +1,13 @@
 package com.rush.domain.orgaism.animal;
 
 import com.rush.config.AnimalConfig;
-import com.rush.config.AnimalRegistry;
-import com.rush.config.ConfigLoader;
 import com.rush.domain.map.Cell;
 import com.rush.domain.orgaism.Organism;
+import com.rush.shared.Direction;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Random;
 
 @Getter
 @Setter
@@ -27,7 +28,11 @@ public abstract class Animal extends Organism {
         this.fullness = foodNeeded / 2;
     }
 
-    public abstract void move();
+    public Direction getMoveDirection() {
+        Direction[] directions = Direction.values();
+        Random random = new Random();
+        return directions[random.nextInt(directions.length)];
+    }
 
     public abstract void eat(Organism organism);
 
