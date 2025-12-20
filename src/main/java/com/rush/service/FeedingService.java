@@ -24,7 +24,8 @@ public class FeedingService {
                 continue;
             }
 
-            if (animal instanceof Predator predator && !isVictimCaught(predator, (Herbivore) organism)) {
+            if (animal instanceof Predator predator
+                    && predatorFailedToCatch(predator, organism)) {
                 continue;
             }
 
@@ -37,8 +38,15 @@ public class FeedingService {
         }
     }
 
+    private boolean predatorFailedToCatch(Predator predator, Organism organism) {
+        return organism instanceof Herbivore victim && !isVictimCaught(predator, victim);
+    }
+
     private static boolean isVictimCaught(Predator predator, Herbivore victim) {
-        int probability = AnimalRegistry.getProbabilityToCatch(predator.getClass(), victim.getClass());
+        int probability = AnimalRegistry.getProbabilityToCatch(
+                predator.getClass(),
+                victim.getClass()
+        );
 
         return ThreadLocalRandom.current().nextInt(100) < probability;
     }
