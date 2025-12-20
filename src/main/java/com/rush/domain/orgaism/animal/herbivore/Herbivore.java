@@ -13,7 +13,7 @@ public abstract class Herbivore extends Animal {
 
     @Override
     public boolean canEat(Organism organism) {
-        return organism instanceof Plant;
+        return organism instanceof Plant && fullness < foodNeeded;
     }
 
     @Override

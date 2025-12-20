@@ -21,11 +21,6 @@ public class Wolf extends Predator {
     }
 
     @Override
-    public boolean isAlive() {
-        return super.isAlive();
-    }
-
-    @Override
     public void die() {
 
     }

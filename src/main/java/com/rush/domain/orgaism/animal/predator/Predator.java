@@ -14,7 +14,8 @@ public abstract class Predator extends Animal {
 
     @Override
     public boolean canEat(Organism organism) {
-        return organism instanceof Herbivore;
+
+        return organism instanceof Herbivore && fullness < foodNeeded;
     }
 
     @Override

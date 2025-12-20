@@ -61,7 +61,7 @@ public class SimulationRunner {
 
     private void startPrinting() {
         scheduler.scheduleAtFixedRate(
-                islandService::printIsland,
+                islandService::printIslandStatistics,
                 0, 1, TimeUnit.SECONDS
         );
     }

@@ -17,11 +17,6 @@ public class Rabbit extends Herbivore {
     }
 
     @Override
-    public void eat(Organism organism) {
-
-    }
-
-    @Override
     public void reproduce() {
 
     }
