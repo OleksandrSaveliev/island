@@ -7,8 +7,8 @@ import com.rush.domain.orgaism.animal.Animal;
 import com.rush.domain.orgaism.animal.herbivore.Herbivore;
 import com.rush.domain.orgaism.animal.predator.Predator;
 import com.rush.shared.Direction;
+import com.rush.shared.Position;
 
-import javax.swing.text.Position;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -23,14 +23,14 @@ public class AnimalService {
 
     public void moveAnimal(Animal animal, Cell fromCell) {
 
-        int[] pos = getCurrentPosition(fromCell);
+        Position position = getCurrentPosition(fromCell);
         Direction direction = animal.getMoveDirection();
         int speed = animal.getSpeed();
 
         Cell[][] cells = islandService.getCells();
 
-        int targetRow = pos[0];
-        int targetCol = pos[1];
+        int targetRow = position.row();
+        int targetCol = position.col();
 
         switch (direction) {
             case AHEAD -> targetRow -= speed;
@@ -64,15 +64,15 @@ public class AnimalService {
     }
 
 
-    private int[] getCurrentPosition(Cell cell) {
+    private Position getCurrentPosition(Cell cell) {
         for (int i = 0; i < islandService.getCells().length; i++) {
             for (int j = 0; j < islandService.getCells()[i].length; j++) {
                 if (islandService.getCells()[i][j] == cell) {
-                    return new int[]{i, j};
+                    return new Position(i, j);
                 }
             }
         }
-        return new int[]{};
+        throw new RuntimeException("Can't find position on the island");
     }
 
     public void feedAnimal(Animal animal, Cell cell) {

@@ -3,8 +3,8 @@ package com.rush.app;
 import com.rush.config.MapConfig;
 import com.rush.domain.orgaism.animal.Animal;
 import com.rush.domain.orgaism.plant.Grass;
-import com.rush.service.CellService;
 import com.rush.service.AnimalService;
+import com.rush.service.CellService;
 import com.rush.service.IslandService;
 
 import java.util.Arrays;
@@ -55,13 +55,16 @@ public class SimulationRunner {
                 .flatMap(Arrays::stream)
                 .forEach(cell -> {
                     List<Animal> animals = cellService.getAnimals(cell);
-                    animals.forEach(animal -> animalService.feedAnimal(animal, cell));
+                    animals.forEach(animal -> {
+                        animalService.feedAnimal(animal, cell);
+                        animalService.moveAnimal(animal, cell);
+                    });
                 });
     }
 
     private void startPrinting() {
         scheduler.scheduleAtFixedRate(
-                islandService::printIslandStatistics,
+                islandService::printIsland,
                 0, 1, TimeUnit.SECONDS
         );
     }
