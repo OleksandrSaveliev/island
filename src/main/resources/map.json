@@ -1,7 +1,7 @@
 {
   "mapWidth": 50,
   "mapHeight": 50,
-  "maxPlantsCount": 10000,
+  "maxPlantsCount": 1000,
   "maxPlantsPerTick": 50,
   "tickPeriodInSeconds": 2
 }
