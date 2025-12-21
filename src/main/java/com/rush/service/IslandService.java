@@ -50,23 +50,6 @@ public class IslandService {
         }
     }
 
-    public void printIsland() {
-        synchronized (islandLock) {
-            for (int i = 0; i < cells.length; i++) {
-                System.out.println("-".repeat(60));
-                for (int j = 0; j < cells[i].length; j++) {
-                    Cell cell = cells[i][j];
-                    System.out.printf("| A:%3d ", cell.count(Animal.class));
-                    System.out.printf("| Pre:%3d ", cell.count(Predator.class));
-                    System.out.printf("| Her:%3d ", cell.count(Herbivore.class));
-                    System.out.printf("| P:%3d ", cell.count(Plant.class));
-                }
-                System.out.println("|");
-            }
-            System.out.println("-".repeat(80));
-        }
-    }
-
     public long countPredators() {
         return getAllAnimals().stream()
                 .filter(animal -> animal instanceof Predator)
