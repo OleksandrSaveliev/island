@@ -13,6 +13,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static com.rush.config.MapConfig.TICK_PERIOD_IN_SECONDS;
+
 public class SimulationRunner {
 
     private final IslandService islandService;
@@ -35,45 +37,38 @@ public class SimulationRunner {
     public void run() {
         startGrassGrowth();
         startPrinting();
-
-        while (true) {
-            startAnimalActions();
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        startAnimalActions();
     }
 
     private void startGrassGrowth() {
         scheduler.scheduleAtFixedRate(
                 () -> islandService.growPlantsRandomly(Grass.class, MapConfig.MAX_PLANTS_PER_TICK),
-                0, 1, TimeUnit.SECONDS
+                0, TICK_PERIOD_IN_SECONDS, TimeUnit.SECONDS
         );
     }
 
     private void startAnimalActions() {
-        Arrays.stream(islandService.getCells())
-                .flatMap(Arrays::stream)
-                .forEach(cell -> {
-                    List<Animal> animals = cellService.getAnimals(cell);
-                    animals.forEach(animal -> {
-                        animalService.feedAnimal(animal, cell);
-                        animalService.moveAnimal(animal, cell);
-                        animalService.reproduceAnimal(animal, cell);
-                    });
-                });
+        scheduler.scheduleAtFixedRate(
+                () -> {
+                    Arrays.stream(islandService.getCells())
+                            .flatMap(Arrays::stream)
+                            .forEach(cell -> {
+                                List<Animal> animals = cellService.getAnimals(cell);
+                                animals.forEach(animal -> {
+                                    animalService.feedAnimal(animal);
+                                    animalService.moveAnimal(animal);
+                                    animalService.reproduceAnimal(animal);
+                                });
+                            });
+                },
+                0, TICK_PERIOD_IN_SECONDS, TimeUnit.SECONDS
+        );
     }
 
     private void startPrinting() {
         scheduler.scheduleAtFixedRate(
-                islandService::printIsland,
-//                ()->{
-//                    System.out.println();
-//                },
-                0, 1, TimeUnit.SECONDS
+                islandService::printIslandStatistics,
+                0, TICK_PERIOD_IN_SECONDS, TimeUnit.SECONDS
         );
     }
 }

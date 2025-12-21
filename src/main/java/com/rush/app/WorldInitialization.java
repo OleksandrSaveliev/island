@@ -1,12 +1,12 @@
 package com.rush.app;
 
-import com.rush.utils.AnimalRegistry;
 import com.rush.config.MapConfig;
 import com.rush.domain.map.Cell;
 import com.rush.domain.organism.animal.Animal;
 import com.rush.domain.organism.plant.Grass;
 import com.rush.service.CellService;
 import com.rush.service.IslandService;
+import com.rush.utils.AnimalRegistry;
 
 import java.util.Collections;
 import java.util.Random;
@@ -39,7 +39,7 @@ public class WorldInitialization {
     private void populateAnimals(Cell cell) {
         for (Class<? extends Animal> type : AnimalRegistry.getAllAnimalsTypes()) {
             int max = AnimalRegistry.getMaxCountByType(type);
-            int count = random.nextInt(max + 1);
+            int count = random.nextInt(max / 2);
 
             for (int i = 0; i < count; i++) {
                 cellService.addAnimal(cell, type);

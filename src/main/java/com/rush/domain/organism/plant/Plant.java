@@ -5,8 +5,14 @@ import lombok.Getter;
 
 @Getter
 public abstract class Plant extends Organism {
+    private final int weight;
 
     protected Plant(int weight) {
-        super(weight);
+        this.weight = weight;
+    }
+
+    @Override
+    public int getWeight() {
+        return weight;
     }
 }

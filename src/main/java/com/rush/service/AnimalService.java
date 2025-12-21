@@ -21,26 +21,34 @@ public class AnimalService {
         this.islandService = islandService;
     }
 
-    public void moveAnimal(Animal animal, Cell fromCell) {
+    public void moveAnimal(Animal animal) {
+        synchronized (islandService.getIslandLock()) {
+            Cell fromCell = animal.getCell();
+            Position position = new Position(fromCell.getRow(), fromCell.getCol());
+            Direction direction = animal.getMoveDirection();
+            int speed = animal.getSpeed();
 
-        Position position = new Position(fromCell.getRow(), fromCell.getCol());
-        Direction direction = animal.getMoveDirection();
-        int speed = animal.getSpeed();
+            Cell targetCell = getTargetCell(position, direction, speed);
 
-        Cell targetCell = getTargetCell(position, direction, speed);
+            if (targetCell == fromCell) {
+                return;
+            }
 
-        if (targetCell == fromCell) {
-            return;
-        }
+            int maxCount = AnimalRegistry.getMaxCountByType(animal.getClass());
 
-        cellService.removeOrganism(fromCell, animal);
-        cellService.addOrganism(targetCell, animal);
-        animal.setCell(targetCell);
+            if (targetCell.count(animal.getClass()) >= maxCount) {
+                return;
+            }
 
-        decreaseFullness(animal);
+            cellService.removeOrganism(fromCell, animal);
+            cellService.addOrganism(targetCell, animal);
+            animal.setCell(targetCell);
 
-        if (!animal.isAlive()) {
-            cellService.removeOrganism(targetCell, animal);
+            decreaseFullness(animal);
+
+            if (!animal.isAlive()) {
+                cellService.removeOrganism(animal.getCell(), animal);
+            }
         }
     }
 
@@ -73,24 +81,26 @@ public class AnimalService {
         return cells[targetRow][targetCol];
     }
 
-    public void feedAnimal(Animal animal, Cell cell) {
+    public void feedAnimal(Animal animal) {
+        synchronized (islandService.getIslandLock()) {
+            Cell cell = animal.getCell();
+            for (Organism organism : List.copyOf(cell.getAll())) {
 
-        for (Organism organism : List.copyOf(cell.getAll())) {
+                if (!animal.isAlive()) {
+                    break;
+                }
 
-            if (!animal.isAlive()) {
-                break;
+                if (!animal.canEat(organism)) {
+                    continue;
+                }
+
+                if (animalFailedToCatch(animal, organism)) {
+                    continue;
+                }
+
+                animal.eat(organism);
+                cellService.removeOrganism(cell, organism);
             }
-
-            if (!animal.canEat(organism)) {
-                continue;
-            }
-
-            if (animalFailedToCatch(animal, organism)) {
-                continue;
-            }
-
-            animal.eat(organism);
-            cellService.removeOrganism(cell, organism);
         }
     }
 
@@ -111,7 +121,9 @@ public class AnimalService {
         animal.setFullness(animal.getFullness() * 0.9);
     }
 
-    public void reproduceAnimal(Animal animal, Cell cell) {
-        animal.reproduce();
+    public void reproduceAnimal(Animal animal) {
+        synchronized (islandService.getIslandLock()) {
+            animal.reproduce();
+        }
     }
 }

@@ -20,14 +20,14 @@ public abstract class Animal extends Organism {
 
     protected boolean alive = true;
     protected Cell cell;
+    protected final int weight;
     protected final int speed;
     protected final double foodNeeded;
     protected double fullness;
 
     protected Animal(Cell cell, AnimalConfig config) {
-        super(config.getWeight());
-
         this.cell = cell;
+        this.weight = config.getWeight();
         this.speed = config.getSpeed();
         this.foodNeeded = config.getFoodNeeded();
         this.fullness = foodNeeded / 2;
@@ -44,6 +44,11 @@ public abstract class Animal extends Organism {
         if (this.fullness <= FULLNESS_LIMIT) {
             alive = false;
         }
+    }
+
+    @Override
+    public int getWeight() {
+        return weight;
     }
 
     public final void eat(Organism organism) {

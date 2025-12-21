@@ -16,11 +16,11 @@ public class FeedingConfig {
     }
 
     public int getProbability(
-            Class<? extends Animal> predator,
+            Class<? extends Animal> animal,
             Class<? extends Animal> victim
     ) {
         return probabilities
-                .getOrDefault(predator.getSimpleName(), Map.of())
+                .getOrDefault(animal.getSimpleName(), Map.of())
                 .getOrDefault(victim.getSimpleName(), 0);
     }
 }
