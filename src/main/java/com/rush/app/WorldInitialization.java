@@ -1,6 +1,6 @@
 package com.rush.app;
 
-import com.rush.config.AnimalRegistry;
+import com.rush.utils.AnimalRegistry;
 import com.rush.config.MapConfig;
 import com.rush.domain.map.Cell;
 import com.rush.domain.organism.animal.Animal;

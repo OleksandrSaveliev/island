@@ -1,7 +1,7 @@
 package com.rush.app;
 
 import com.rush.config.*;
-import com.rush.config.AnimalRegistry;
+import com.rush.utils.AnimalRegistry;
 import com.rush.domain.map.Island;
 import com.rush.service.CellService;
 import com.rush.service.AnimalService;

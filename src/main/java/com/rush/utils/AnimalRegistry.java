@@ -1,5 +1,7 @@
-package com.rush.config;
+package com.rush.utils;
 
+import com.rush.config.AnimalConfig;
+import com.rush.config.FeedingConfig;
 import com.rush.domain.organism.animal.Animal;
 import org.reflections.Reflections;
 
@@ -17,7 +19,7 @@ public class AnimalRegistry {
     private static final Map<String, Class<? extends Animal>> TYPES;
 
     static {
-        Reflections reflections = new Reflections("com.rush.domain.orgaism.animal");
+        Reflections reflections = new Reflections("com.rush.domain.organism.animal");
 
         TYPES = reflections.getSubTypesOf(Animal.class)
                 .stream()

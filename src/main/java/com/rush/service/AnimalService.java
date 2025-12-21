@@ -1,6 +1,6 @@
 package com.rush.service;
 
-import com.rush.config.AnimalRegistry;
+import com.rush.utils.AnimalRegistry;
 import com.rush.domain.map.Cell;
 import com.rush.domain.organism.Organism;
 import com.rush.domain.organism.animal.Animal;
@@ -85,9 +85,7 @@ public class AnimalService {
                 continue;
             }
 
-            if (animal instanceof Predator predator
-                    && predatorFailedToCatch(predator, organism)) {
-
+            if (animalFailedToCatch(animal, organism)) {
                 continue;
             }
 
@@ -96,13 +94,13 @@ public class AnimalService {
         }
     }
 
-    private boolean predatorFailedToCatch(Predator predator, Organism organism) {
-        return organism instanceof Herbivore victim && !isVictimCaught(predator, victim);
+    private boolean animalFailedToCatch(Animal animal, Organism organism) {
+        return organism instanceof Animal victim && !isVictimCaught(animal, victim);
     }
 
-    private static boolean isVictimCaught(Predator predator, Herbivore victim) {
+    private static boolean isVictimCaught(Animal animal, Animal victim) {
         int probability = AnimalRegistry.getProbabilityToCatch(
-                predator.getClass(),
+                animal.getClass(),
                 victim.getClass()
         );
 

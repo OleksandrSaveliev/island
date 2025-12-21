@@ -1,11 +1,11 @@
 package com.rush.domain.organism.animal;
 
 import com.rush.config.AnimalConfig;
-import com.rush.config.AnimalRegistry;
 import com.rush.domain.map.Cell;
 import com.rush.domain.organism.Organism;
 import com.rush.shared.Direction;
 import com.rush.utils.AnimalFactory;
+import com.rush.utils.AnimalRegistry;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,14 +20,14 @@ public abstract class Animal extends Organism {
 
     protected boolean alive = true;
     protected Cell cell;
-    protected final int weight;
     protected final int speed;
     protected final double foodNeeded;
     protected double fullness;
 
     protected Animal(Cell cell, AnimalConfig config) {
+        super(config.getWeight());
+
         this.cell = cell;
-        this.weight = config.getWeight();
         this.speed = config.getSpeed();
         this.foodNeeded = config.getFoodNeeded();
         this.fullness = foodNeeded / 2;
@@ -46,8 +46,14 @@ public abstract class Animal extends Organism {
         }
     }
 
-
-    public abstract void eat(Organism organism);
+    public final void eat(Organism organism) {
+        if (!isHungry()) {
+            return;
+        }
+        double remaining = foodNeeded - fullness;
+        double gained = Math.min(organism.getWeight(), remaining);
+        setFullness(fullness + gained);
+    }
 
     public abstract boolean canEat(Organism organism);
 

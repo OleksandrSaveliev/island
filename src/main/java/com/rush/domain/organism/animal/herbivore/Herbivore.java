@@ -6,6 +6,8 @@ import com.rush.domain.organism.Organism;
 import com.rush.domain.organism.animal.Animal;
 import com.rush.domain.organism.plant.Plant;
 
+import com.rush.utils.AnimalRegistry;
+
 public abstract class Herbivore extends Animal {
     protected Herbivore(Cell cell, AnimalConfig config) {
         super(cell, config);
@@ -13,14 +15,15 @@ public abstract class Herbivore extends Animal {
 
     @Override
     public boolean canEat(Organism organism) {
-        return organism instanceof Plant && isHungry();
-    }
-
-    @Override
-    public void eat(Organism food) {
-        fullness += ((Plant) food).getWeight();
-        if (fullness > foodNeeded) {
-            fullness = foodNeeded;
+        if (!isHungry()) {
+            return false;
         }
+        if (organism instanceof Plant) {
+            return true;
+        }
+        if (organism instanceof Animal animal) {
+            return AnimalRegistry.getProbabilityToCatch(this.getClass(), animal.getClass()) > 0;
+        }
+        return false;
     }
 }
