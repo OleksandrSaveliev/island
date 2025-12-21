@@ -19,19 +19,16 @@ public class SimulationRunner {
 
     private final IslandService islandService;
     private final AnimalService animalService;
-    private final CellService cellService;
 
     private final ScheduledExecutorService scheduler =
             Executors.newScheduledThreadPool(4);
 
     public SimulationRunner(
             IslandService islandService,
-            AnimalService animalService,
-            CellService cellService
+            AnimalService animalService
     ) {
         this.islandService = islandService;
         this.animalService = animalService;
-        this.cellService = cellService;
     }
 
     public void run() {

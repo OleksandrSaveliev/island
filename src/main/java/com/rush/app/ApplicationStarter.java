@@ -23,7 +23,7 @@ public class ApplicationStarter {
         AnimalService animalService = new AnimalService(cellService, islandService);
 
         WorldInitialization worldInitialization = new WorldInitialization(islandService, cellService);
-        SimulationRunner runner = new SimulationRunner(islandService, animalService, cellService);
+        SimulationRunner runner = new SimulationRunner(islandService, animalService);
 
         worldInitialization.initialize();
         runner.run();
