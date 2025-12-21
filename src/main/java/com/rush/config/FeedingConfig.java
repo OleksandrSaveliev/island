@@ -1,7 +1,7 @@
 package com.rush.config;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.rush.domain.orgaism.animal.Animal;
+import com.rush.domain.organism.animal.Animal;
 
 import java.util.HashMap;
 import java.util.Map;

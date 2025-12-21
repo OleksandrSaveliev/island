@@ -3,7 +3,7 @@ package com.rush.utils;
 import com.rush.config.AnimalConfig;
 import com.rush.config.AnimalRegistry;
 import com.rush.domain.map.Cell;
-import com.rush.domain.orgaism.animal.Animal;
+import com.rush.domain.organism.animal.Animal;
 
 public class AnimalFactory {
     private AnimalFactory() {

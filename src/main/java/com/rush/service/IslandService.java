@@ -2,10 +2,10 @@ package com.rush.service;
 
 import com.rush.domain.map.Cell;
 import com.rush.domain.map.Island;
-import com.rush.domain.orgaism.animal.Animal;
-import com.rush.domain.orgaism.animal.herbivore.Herbivore;
-import com.rush.domain.orgaism.animal.predator.Predator;
-import com.rush.domain.orgaism.plant.Plant;
+import com.rush.domain.organism.animal.Animal;
+import com.rush.domain.organism.animal.herbivore.Herbivore;
+import com.rush.domain.organism.animal.predator.Predator;
+import com.rush.domain.organism.plant.Plant;
 import lombok.Getter;
 
 import java.util.Arrays;

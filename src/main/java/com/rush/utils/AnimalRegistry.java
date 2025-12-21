@@ -1,6 +1,6 @@
 package com.rush.config;
 
-import com.rush.domain.orgaism.animal.Animal;
+import com.rush.domain.organism.animal.Animal;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Modifier;

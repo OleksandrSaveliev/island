@@ -1,13 +1,17 @@
-package com.rush.domain.orgaism.animal;
+package com.rush.domain.organism.animal;
 
 import com.rush.config.AnimalConfig;
+import com.rush.config.AnimalRegistry;
 import com.rush.domain.map.Cell;
-import com.rush.domain.orgaism.Organism;
+import com.rush.domain.organism.Organism;
 import com.rush.shared.Direction;
+import com.rush.utils.AnimalFactory;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
 @Setter
@@ -36,17 +40,32 @@ public abstract class Animal extends Organism {
     }
 
     public void setFullness(double fullness) {
-        this.fullness = fullness;
-        if (fullness <= FULLNESS_LIMIT) {
+        this.fullness = Math.min(fullness, foodNeeded);
+        if (this.fullness <= FULLNESS_LIMIT) {
             alive = false;
         }
     }
+
 
     public abstract void eat(Organism organism);
 
     public abstract boolean canEat(Organism organism);
 
-    public abstract void reproduce();
+    public void reproduce() {
+        if (isReadyToReproduce()) {
+            List<? extends Animal> animalsInCell = cell.getByType(this.getClass());
+            if (animalsInCell.size() > 1 && animalsInCell.size() < AnimalRegistry.getMaxCountByType(this.getClass())) {
+                if (ThreadLocalRandom.current().nextBoolean()) {
+                    Animal newAnimal = AnimalFactory.getInstance(this.getClass(), cell);
+                    cell.add(newAnimal);
+                }
+            }
+        }
+    }
+
+    private boolean isReadyToReproduce() {
+        return fullness >= foodNeeded * 0.8;
+    }
 
     public boolean isHungry() {
         return fullness < foodNeeded;

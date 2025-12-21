@@ -1,6 +1,6 @@
 package com.rush.utils;
 
-import com.rush.domain.orgaism.plant.Plant;
+import com.rush.domain.organism.plant.Plant;
 
 public class PlantFactory {
     private PlantFactory() {

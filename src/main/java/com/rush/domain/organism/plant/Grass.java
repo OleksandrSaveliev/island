@@ -1,4 +1,4 @@
-package com.rush.domain.orgaism.plant;
+package com.rush.domain.organism.plant;
 
 public class Grass extends Plant {
     public Grass() {

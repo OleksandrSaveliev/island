@@ -3,11 +3,12 @@ package com.rush.app;
 import com.rush.config.AnimalRegistry;
 import com.rush.config.MapConfig;
 import com.rush.domain.map.Cell;
-import com.rush.domain.orgaism.animal.Animal;
-import com.rush.domain.orgaism.plant.Grass;
+import com.rush.domain.organism.animal.Animal;
+import com.rush.domain.organism.plant.Grass;
 import com.rush.service.CellService;
 import com.rush.service.IslandService;
 
+import java.util.Collections;
 import java.util.Random;
 
 public class WorldInitialization {
@@ -32,6 +33,7 @@ public class WorldInitialization {
     private void populateCell(Cell cell) {
         populateAnimals(cell);
         populatePlants(cell);
+        Collections.shuffle(cellService.getAnimals(cell));
     }
 
     private void populateAnimals(Cell cell) {

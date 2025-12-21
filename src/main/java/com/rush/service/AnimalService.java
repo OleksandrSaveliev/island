@@ -2,10 +2,10 @@ package com.rush.service;
 
 import com.rush.config.AnimalRegistry;
 import com.rush.domain.map.Cell;
-import com.rush.domain.orgaism.Organism;
-import com.rush.domain.orgaism.animal.Animal;
-import com.rush.domain.orgaism.animal.herbivore.Herbivore;
-import com.rush.domain.orgaism.animal.predator.Predator;
+import com.rush.domain.organism.Organism;
+import com.rush.domain.organism.animal.Animal;
+import com.rush.domain.organism.animal.herbivore.Herbivore;
+import com.rush.domain.organism.animal.predator.Predator;
 import com.rush.shared.Direction;
 import com.rush.shared.Position;
 
@@ -23,10 +23,28 @@ public class AnimalService {
 
     public void moveAnimal(Animal animal, Cell fromCell) {
 
-        Position position = getCurrentPosition(fromCell);
+        Position position = new Position(fromCell.getRow(), fromCell.getCol());
         Direction direction = animal.getMoveDirection();
         int speed = animal.getSpeed();
 
+        Cell targetCell = getTargetCell(position, direction, speed);
+
+        if (targetCell == fromCell) {
+            return;
+        }
+
+        cellService.removeOrganism(fromCell, animal);
+        cellService.addOrganism(targetCell, animal);
+        animal.setCell(targetCell);
+
+        decreaseFullness(animal);
+
+        if (!animal.isAlive()) {
+            cellService.removeOrganism(targetCell, animal);
+        }
+    }
+
+    private Cell getTargetCell(Position position, Direction direction, int speed) {
         Cell[][] cells = islandService.getCells();
 
         int targetRow = position.row();
@@ -52,33 +70,7 @@ public class AnimalService {
             targetCol--;
         }
 
-        Cell targetCell = cells[targetRow][targetCol];
-
-        if (targetCell == fromCell) {
-            return;
-        }
-
-        cellService.removeOrganism(fromCell, animal);
-        cellService.addOrganism(targetCell, animal);
-        animal.setCell(targetCell);
-
-        decreaseFullness(animal);
-
-        if (!animal.isAlive()) {
-            cellService.removeOrganism(targetCell, animal);
-        }
-    }
-
-
-    private Position getCurrentPosition(Cell cell) {
-        for (int i = 0; i < islandService.getCells().length; i++) {
-            for (int j = 0; j < islandService.getCells()[i].length; j++) {
-                if (islandService.getCells()[i][j] == cell) {
-                    return new Position(i, j);
-                }
-            }
-        }
-        throw new RuntimeException("Can't find position on the island");
+        return cells[targetRow][targetCol];
     }
 
     public void feedAnimal(Animal animal, Cell cell) {
@@ -96,22 +88,11 @@ public class AnimalService {
             if (animal instanceof Predator predator
                     && predatorFailedToCatch(predator, organism)) {
 
-                decreaseFullness(predator);
-
-                if (!predator.isAlive()) {
-                    cellService.removeOrganism(cell, predator);
-                    break;
-                }
-
                 continue;
             }
 
             animal.eat(organism);
             cellService.removeOrganism(cell, organism);
-
-            if (!animal.isHungry()) {
-                break;
-            }
         }
     }
 
@@ -130,5 +111,9 @@ public class AnimalService {
 
     private void decreaseFullness(Animal animal) {
         animal.setFullness(animal.getFullness() * 0.9);
+    }
+
+    public void reproduceAnimal(Animal animal, Cell cell) {
+        animal.reproduce();
     }
 }

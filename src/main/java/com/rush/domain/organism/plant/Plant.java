@@ -1,6 +1,6 @@
-package com.rush.domain.orgaism.plant;
+package com.rush.domain.organism.plant;
 
-import com.rush.domain.orgaism.Organism;
+import com.rush.domain.organism.Organism;
 import lombok.Getter;
 
 @Getter

@@ -1,8 +1,8 @@
 package com.rush.app;
 
 import com.rush.config.MapConfig;
-import com.rush.domain.orgaism.animal.Animal;
-import com.rush.domain.orgaism.plant.Grass;
+import com.rush.domain.organism.animal.Animal;
+import com.rush.domain.organism.plant.Grass;
 import com.rush.service.AnimalService;
 import com.rush.service.CellService;
 import com.rush.service.IslandService;
@@ -50,7 +50,7 @@ public class SimulationRunner {
     private void startGrassGrowth() {
         scheduler.scheduleAtFixedRate(
                 () -> islandService.growPlantsRandomly(Grass.class, MapConfig.MAX_PLANTS_PER_TICK),
-                0, 2, TimeUnit.SECONDS
+                0, 1, TimeUnit.SECONDS
         );
     }
 
@@ -62,6 +62,7 @@ public class SimulationRunner {
                     animals.forEach(animal -> {
                         animalService.feedAnimal(animal, cell);
                         animalService.moveAnimal(animal, cell);
+                        animalService.reproduceAnimal(animal, cell);
                     });
                 });
     }
@@ -69,6 +70,9 @@ public class SimulationRunner {
     private void startPrinting() {
         scheduler.scheduleAtFixedRate(
                 islandService::printIsland,
+//                ()->{
+//                    System.out.println();
+//                },
                 0, 1, TimeUnit.SECONDS
         );
     }

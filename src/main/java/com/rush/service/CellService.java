@@ -1,12 +1,13 @@
 package com.rush.service;
 
 import com.rush.domain.map.Cell;
-import com.rush.domain.orgaism.Organism;
-import com.rush.domain.orgaism.animal.Animal;
-import com.rush.domain.orgaism.plant.Plant;
+import com.rush.domain.organism.Organism;
+import com.rush.domain.organism.animal.Animal;
+import com.rush.domain.organism.plant.Plant;
 import com.rush.utils.AnimalFactory;
 import com.rush.utils.PlantFactory;
 
+import java.util.Collections;
 import java.util.List;
 
 public class CellService {
@@ -18,7 +19,9 @@ public class CellService {
     }
 
     public List<Animal> getAnimals(Cell cell) {
-        return cell.getByType(Animal.class);
+        List<Animal> animals = cell.getByType(Animal.class);
+        Collections.shuffle(animals);
+        return animals;
     }
 
     public List<Plant> getPlants(Cell cell) {

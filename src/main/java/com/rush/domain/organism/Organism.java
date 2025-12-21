@@ -1,4 +1,4 @@
-package com.rush.domain.orgaism;
+package com.rush.domain.organism;
 
 public abstract class Organism {
 }

@@ -1,4 +1,4 @@
-package com.rush.domain.orgaism.animal.herbivore;
+package com.rush.domain.organism.animal.herbivore;
 
 import com.rush.config.AnimalConfig;
 import com.rush.domain.map.Cell;
@@ -6,11 +6,6 @@ import com.rush.domain.map.Cell;
 public class Mouse extends Herbivore {
     public Mouse(Cell cell, AnimalConfig config) {
         super(cell, config);
-    }
-
-    @Override
-    public void reproduce() {
-
     }
 
 }

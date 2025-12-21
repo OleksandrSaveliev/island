@@ -1,10 +1,10 @@
-package com.rush.domain.orgaism.animal.herbivore;
+package com.rush.domain.organism.animal.herbivore;
 
 import com.rush.config.AnimalConfig;
 import com.rush.domain.map.Cell;
-import com.rush.domain.orgaism.Organism;
-import com.rush.domain.orgaism.animal.Animal;
-import com.rush.domain.orgaism.plant.Plant;
+import com.rush.domain.organism.Organism;
+import com.rush.domain.organism.animal.Animal;
+import com.rush.domain.organism.plant.Plant;
 
 public abstract class Herbivore extends Animal {
     protected Herbivore(Cell cell, AnimalConfig config) {
@@ -13,7 +13,7 @@ public abstract class Herbivore extends Animal {
 
     @Override
     public boolean canEat(Organism organism) {
-        return organism instanceof Plant && fullness < foodNeeded;
+        return organism instanceof Plant && isHungry();
     }
 
     @Override
