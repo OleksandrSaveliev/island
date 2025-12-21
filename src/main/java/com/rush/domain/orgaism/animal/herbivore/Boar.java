@@ -13,8 +13,4 @@ public class Boar extends Herbivore {
 
     }
 
-    @Override
-    public void die() {
-
-    }
 }

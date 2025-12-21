@@ -13,8 +13,4 @@ public class Buffalo extends Herbivore {
 
     }
 
-    @Override
-    public void die() {
-
-    }
 }

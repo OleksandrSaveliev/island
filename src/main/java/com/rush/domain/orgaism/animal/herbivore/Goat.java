@@ -13,8 +13,4 @@ public class Goat extends Herbivore {
 
     }
 
-    @Override
-    public void die() {
-
-    }
 }

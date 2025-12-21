@@ -2,8 +2,6 @@ package com.rush.domain.orgaism.animal.herbivore;
 
 import com.rush.config.AnimalConfig;
 import com.rush.domain.map.Cell;
-import com.rush.domain.orgaism.Organism;
-import com.rush.domain.orgaism.animal.Animal;
 
 public class Rabbit extends Herbivore {
 
@@ -21,8 +19,4 @@ public class Rabbit extends Herbivore {
         return super.isAlive();
     }
 
-    @Override
-    public void die() {
-
-    }
 }

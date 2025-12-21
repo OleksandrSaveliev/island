@@ -12,8 +12,9 @@ import java.util.Random;
 @Getter
 @Setter
 public abstract class Animal extends Organism {
+    private static final double FULLNESS_LIMIT = 0.001;
 
-    protected boolean isAlive = true;
+    protected boolean alive = true;
     protected Cell cell;
     protected final int weight;
     protected final int speed;
@@ -34,15 +35,20 @@ public abstract class Animal extends Organism {
         return directions[random.nextInt(directions.length)];
     }
 
+    public void setFullness(double fullness) {
+        this.fullness = fullness;
+        if (fullness <= FULLNESS_LIMIT) {
+            alive = false;
+        }
+    }
+
     public abstract void eat(Organism organism);
 
     public abstract boolean canEat(Organism organism);
 
     public abstract void reproduce();
 
-    public abstract void die();
-
     public boolean isHungry() {
-        return fullness == foodNeeded;
+        return fullness < foodNeeded;
     }
 }

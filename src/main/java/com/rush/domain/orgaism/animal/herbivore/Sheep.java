@@ -13,8 +13,4 @@ public class Sheep extends Herbivore{
 
     }
 
-    @Override
-    public void die() {
-
-    }
 }

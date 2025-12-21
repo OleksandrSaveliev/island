@@ -61,6 +61,12 @@ public class AnimalService {
         cellService.removeOrganism(fromCell, animal);
         cellService.addOrganism(targetCell, animal);
         animal.setCell(targetCell);
+
+        decreaseFullness(animal);
+
+        if (!animal.isAlive()) {
+            cellService.removeOrganism(targetCell, animal);
+        }
     }
 
 
@@ -76,7 +82,12 @@ public class AnimalService {
     }
 
     public void feedAnimal(Animal animal, Cell cell) {
+
         for (Organism organism : List.copyOf(cell.getAll())) {
+
+            if (!animal.isAlive()) {
+                break;
+            }
 
             if (!animal.canEat(organism)) {
                 continue;
@@ -84,6 +95,14 @@ public class AnimalService {
 
             if (animal instanceof Predator predator
                     && predatorFailedToCatch(predator, organism)) {
+
+                decreaseFullness(predator);
+
+                if (!predator.isAlive()) {
+                    cellService.removeOrganism(cell, predator);
+                    break;
+                }
+
                 continue;
             }
 
@@ -91,7 +110,7 @@ public class AnimalService {
             cellService.removeOrganism(cell, organism);
 
             if (!animal.isHungry()) {
-                return;
+                break;
             }
         }
     }
@@ -107,5 +126,9 @@ public class AnimalService {
         );
 
         return ThreadLocalRandom.current().nextInt(100) < probability;
+    }
+
+    private void decreaseFullness(Animal animal) {
+        animal.setFullness(animal.getFullness() * 0.9);
     }
 }

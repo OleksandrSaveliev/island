@@ -2,7 +2,6 @@ package com.rush.domain.orgaism.animal.predator;
 
 import com.rush.config.AnimalConfig;
 import com.rush.domain.map.Cell;
-import com.rush.domain.orgaism.Organism;
 
 public class Wolf extends Predator {
 
@@ -15,8 +14,4 @@ public class Wolf extends Predator {
 
     }
 
-    @Override
-    public void die() {
-
-    }
 }

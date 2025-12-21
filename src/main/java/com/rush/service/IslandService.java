@@ -67,8 +67,7 @@ public class IslandService {
         var animalStats = Arrays.stream(cells)
                 .flatMap(Arrays::stream)
                 .flatMap(cell -> cellService.getAnimals(cell).stream())
-                .collect(
-                        Collectors.groupingBy(
+                .collect(Collectors.groupingBy(
                                 animal -> animal.getClass().getSimpleName(),
                                 Collectors.counting()
                         )

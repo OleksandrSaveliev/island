@@ -22,7 +22,11 @@ public class SimulationRunner {
     private final ScheduledExecutorService scheduler =
             Executors.newScheduledThreadPool(3);
 
-    public SimulationRunner(IslandService islandService, AnimalService animalService, CellService cellService) {
+    public SimulationRunner(
+            IslandService islandService,
+            AnimalService animalService,
+            CellService cellService
+    ) {
         this.islandService = islandService;
         this.animalService = animalService;
         this.cellService = cellService;
