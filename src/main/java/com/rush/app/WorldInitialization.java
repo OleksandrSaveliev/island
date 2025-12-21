@@ -15,11 +15,13 @@ public class WorldInitialization {
 
     private final IslandService islandService;
     private final CellService cellService;
+    private final MapConfig mapConfig;
     private final Random random = new Random();
 
-    public WorldInitialization(IslandService islandService, CellService cellService) {
+    public WorldInitialization(IslandService islandService, CellService cellService, MapConfig mapConfig) {
         this.islandService = islandService;
         this.cellService = cellService;
+        this.mapConfig = mapConfig;
     }
 
     public void initialize() {
@@ -48,7 +50,7 @@ public class WorldInitialization {
     }
 
     private void populatePlants(Cell cell) {
-        int count = random.nextInt(MapConfig.MAX_PLANTS_COUNT + 1);
+        int count = random.nextInt(mapConfig.getMaxPlantsCount() + 1);
         cellService.addPlants(cell, Grass.class, count);
     }
 }

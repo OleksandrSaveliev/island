@@ -11,19 +11,21 @@ import java.util.List;
 
 public class ApplicationStarter {
 
+    private static MapConfig mapConfig;
+
     private ApplicationStarter() {
     }
 
     public static void start() {
         loadConfigurations();
 
-        Island island = new Island(MapConfig.MAP_WIDTH, MapConfig.MAP_HEIGHT);
+        Island island = new Island(mapConfig.getMapWidth(), mapConfig.getMapHeight());
         CellService cellService = new CellService();
-        IslandService islandService = new IslandService(island, cellService);
+        IslandService islandService = new IslandService(island, cellService, mapConfig);
         AnimalService animalService = new AnimalService(cellService, islandService);
 
-        WorldInitialization worldInitialization = new WorldInitialization(islandService, cellService);
-        SimulationRunner runner = new SimulationRunner(islandService, animalService);
+        WorldInitialization worldInitialization = new WorldInitialization(islandService, cellService, mapConfig);
+        SimulationRunner runner = new SimulationRunner(islandService, animalService, cellService, mapConfig);
 
         worldInitialization.initialize();
         runner.run();
@@ -31,8 +33,9 @@ public class ApplicationStarter {
 
     private static void loadConfigurations () {
         ConfigLoader configLoader = new ConfigLoader();
-        List<AnimalConfig> animalConfigs = configLoader.loadAnimals("animals.json");
-        FeedingConfig feedingConfig = configLoader.loadFeeding("feeding.json");
+        List<AnimalConfig> animalConfigs = configLoader.loadAnimalsConfig("animals.json");
+        FeedingConfig feedingConfig = configLoader.loadFeedingConfig("feeding.json");
+        mapConfig = configLoader.loadMapConfig("map.json");
 
         AnimalRegistry.registerAnimals(animalConfigs);
         AnimalRegistry.registerFeeding(feedingConfig);

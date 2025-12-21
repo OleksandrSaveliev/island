@@ -13,22 +13,26 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static com.rush.config.MapConfig.TICK_PERIOD_IN_SECONDS;
-
 public class SimulationRunner {
 
     private final IslandService islandService;
     private final AnimalService animalService;
+    private final CellService cellService; // Re-introduced
+    private final MapConfig mapConfig;
 
     private final ScheduledExecutorService scheduler =
-            Executors.newScheduledThreadPool(4);
+            Executors.newScheduledThreadPool(4); // Revert to 4 threads
 
     public SimulationRunner(
             IslandService islandService,
-            AnimalService animalService
+            AnimalService animalService,
+            CellService cellService, // Re-introduced
+            MapConfig mapConfig
     ) {
         this.islandService = islandService;
         this.animalService = animalService;
+        this.cellService = cellService; // Re-introduced
+        this.mapConfig = mapConfig;
     }
 
     public void run() {
@@ -40,8 +44,8 @@ public class SimulationRunner {
 
     private void startGrassGrowth() {
         scheduler.scheduleAtFixedRate(
-                () -> islandService.growPlantsRandomly(Grass.class, MapConfig.MAX_PLANTS_PER_TICK),
-                0, TICK_PERIOD_IN_SECONDS, TimeUnit.SECONDS
+                () -> islandService.growPlantsRandomly(Grass.class, mapConfig.getMaxPlantsPerTick()),
+                0, mapConfig.getTickPeriodInSeconds(), TimeUnit.SECONDS
         );
     }
 
@@ -55,14 +59,14 @@ public class SimulationRunner {
                         animalService.reproduceAnimal(animal);
                     });
                 },
-                0, TICK_PERIOD_IN_SECONDS, TimeUnit.SECONDS
+                0, mapConfig.getTickPeriodInSeconds(), TimeUnit.SECONDS
         );
     }
 
     private void startPrinting() {
         scheduler.scheduleAtFixedRate(
                 islandService::printIslandStatistics,
-                0, TICK_PERIOD_IN_SECONDS, TimeUnit.SECONDS
+                0, mapConfig.getTickPeriodInSeconds(), TimeUnit.SECONDS
         );
     }
 
@@ -76,7 +80,7 @@ public class SimulationRunner {
                         scheduler.shutdown();
                     }
                 },
-                0, TICK_PERIOD_IN_SECONDS, TimeUnit.SECONDS
+                0, mapConfig.getTickPeriodInSeconds(), TimeUnit.SECONDS
         );
     }
 }

@@ -1,9 +1,12 @@
 package com.rush.config;
 
+import lombok.Data;
+
+@Data
 public class MapConfig {
-    public static final int MAP_WIDTH = 150;
-    public static final int MAP_HEIGHT = 50;
-    public static final int MAX_PLANTS_COUNT = 10000;
-    public static final int MAX_PLANTS_PER_TICK = 50;
-    public static final int TICK_PERIOD_IN_SECONDS = 2;
+    private int mapWidth;
+    private int mapHeight;
+    private int maxPlantsCount;
+    private int maxPlantsPerTick;
+    private int tickPeriodInSeconds;
 }

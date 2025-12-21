@@ -1,5 +1,6 @@
 package com.rush.service;
 
+import com.rush.config.MapConfig;
 import com.rush.domain.map.Cell;
 import com.rush.domain.map.Island;
 import com.rush.domain.organism.animal.Animal;
@@ -18,13 +19,15 @@ public class IslandService {
     @Getter
     private final Cell[][] cells;
     private final CellService cellService;
+    private final MapConfig mapConfig;
 
     @Getter
     private final Object islandLock = new Object();
 
-    public IslandService(Island island, CellService cellService) {
+    public IslandService(Island island, CellService cellService, MapConfig mapConfig) {
         this.cells = island.getCells();
         this.cellService = cellService;
+        this.mapConfig = mapConfig;
     }
 
     public void growPlantsRandomly(Class<? extends Plant> plantType, int maxAmount) {
@@ -32,7 +35,7 @@ public class IslandService {
         synchronized (islandLock) {
             for (Cell[] row : cells) {
                 for (Cell cell : row) {
-                    int amount = random.nextInt(maxAmount + 1);
+                    int amount = random.nextInt(mapConfig.getMaxPlantsPerTick() + 1);
                     if (amount > 0) {
                         cellService.growPlants(cell, plantType, amount);
                     }
