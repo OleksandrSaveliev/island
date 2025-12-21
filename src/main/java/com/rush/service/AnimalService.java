@@ -118,7 +118,7 @@ public class AnimalService {
     }
 
     private void decreaseFullness(Animal animal) {
-        animal.setFullness(animal.getFullness() * 0.9);
+        animal.setFullness(animal.getFullness() * 0.8);
     }
 
     public void reproduceAnimal(Animal animal) {

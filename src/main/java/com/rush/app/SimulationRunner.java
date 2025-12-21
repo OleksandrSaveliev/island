@@ -22,7 +22,7 @@ public class SimulationRunner {
     private final CellService cellService;
 
     private final ScheduledExecutorService scheduler =
-            Executors.newScheduledThreadPool(3);
+            Executors.newScheduledThreadPool(4);
 
     public SimulationRunner(
             IslandService islandService,
@@ -38,6 +38,7 @@ public class SimulationRunner {
         startGrassGrowth();
         startPrinting();
         startAnimalActions();
+        startStopConditionCheck();
     }
 
     private void startGrassGrowth() {
@@ -50,16 +51,12 @@ public class SimulationRunner {
     private void startAnimalActions() {
         scheduler.scheduleAtFixedRate(
                 () -> {
-                    Arrays.stream(islandService.getCells())
-                            .flatMap(Arrays::stream)
-                            .forEach(cell -> {
-                                List<Animal> animals = cellService.getAnimals(cell);
-                                animals.forEach(animal -> {
-                                    animalService.feedAnimal(animal);
-                                    animalService.moveAnimal(animal);
-                                    animalService.reproduceAnimal(animal);
-                                });
-                            });
+                    List<Animal> allAnimals = islandService.getAllAnimals();
+                    allAnimals.forEach(animal -> {
+                        animalService.feedAnimal(animal);
+                        animalService.moveAnimal(animal);
+                        animalService.reproduceAnimal(animal);
+                    });
                 },
                 0, TICK_PERIOD_IN_SECONDS, TimeUnit.SECONDS
         );
@@ -68,6 +65,20 @@ public class SimulationRunner {
     private void startPrinting() {
         scheduler.scheduleAtFixedRate(
                 islandService::printIslandStatistics,
+                0, TICK_PERIOD_IN_SECONDS, TimeUnit.SECONDS
+        );
+    }
+
+    private void startStopConditionCheck() {
+        scheduler.scheduleAtFixedRate(
+                () -> {
+                    long predatorsCount = islandService.countPredators();
+                    long herbivoresCount = islandService.countHerbivores();
+                    if (predatorsCount == 0 || herbivoresCount == 0) {
+                        System.out.println("Simulation stopped. All predators or herbivores are gone.");
+                        scheduler.shutdown();
+                    }
+                },
                 0, TICK_PERIOD_IN_SECONDS, TimeUnit.SECONDS
         );
     }

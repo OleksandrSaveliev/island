@@ -67,6 +67,18 @@ public class IslandService {
         }
     }
 
+    public long countPredators() {
+        return getAllAnimals().stream()
+                .filter(animal -> animal instanceof Predator)
+                .count();
+    }
+
+    public long countHerbivores() {
+        return getAllAnimals().stream()
+                .filter(animal -> animal instanceof Herbivore)
+                .count();
+    }
+
     public void printIslandStatistics() {
         synchronized (islandLock) {
             System.out.println("=== Island statistics ===");
